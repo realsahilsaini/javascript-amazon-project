@@ -1,35 +1,6 @@
-const products = [
-  {
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    name: "Athletic Cotton Socks 6 Pairs",
-    rating: {
-      stars: 4.5,
-      count: 87,
-    },
-    priceCents: 1090,
-  },
-  {
-    image: "images/products/intermediate-composite-basketball.jpg",
-    name: "Intermediate Composite Basketball",
-    rating: {
-      stars: 4,
-      count: 127,
-    },
-    priceCents: 2095,
-  },
-  {
-    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    name: "Adults Plain Cotton T-Shirt - 2 Pack",
-    rating: {
-      stars: 4.5,
-      count: 56,
-    },
-    priceCents: 799,
-  },
-];
-
 let productsHMTL = "";
 
+//We'll be getting "products" from the "products.js" in "data" folder
 products.forEach((product) => {
   productsHMTL += `
   <div class="product-container">
@@ -51,7 +22,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            ${(product.priceCents / 100).toFixed(2)}
+            $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -84,8 +55,6 @@ products.forEach((product) => {
 
   
 });
-
-console.log(productsHMTL);
 
 
 document.querySelector(".js-products-grid").innerHTML = productsHMTL;
