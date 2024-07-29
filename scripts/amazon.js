@@ -1,3 +1,5 @@
+import { cart } from "../data/cart.js";
+
 let productsHMTL = "";
 
 //We'll be getting "products" from the "products.js" in "data" folder
