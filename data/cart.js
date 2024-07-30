@@ -30,21 +30,20 @@ export function addToCart(productId) {
 // ---------------------------------------------------
 
 export function removeFromCart(productId) {
-
-  const newCart = [];
-  cart.forEach((cartItem) => {
-    if (productId !== cartItem.productId) {
-      newCart.push(cartItem);
-    }
-  });
-  cart = newCart;
-
-//another logic using splice method
-  // let matchingItemIndex;
-  // cart.forEach((cartItem, index) => {
-  //   if (productId === cartItem.productId) {
-  //     matchingItemIndex = index;
+  // const newCart = [];
+  // cart.forEach((cartItem) => {
+  //   if (productId !== cartItem.productId) {
+  //     newCart.push(cartItem);
   //   }
   // });
-  // cart.splice(matchingItemIndex, 1);
+  // cart = newCart;
+
+//another logic using splice method
+  let matchingItemIndex;
+  cart.forEach((cartItem, index) => {
+    if (productId === cartItem.productId) {
+      matchingItemIndex = index;
+    }
+  });
+  cart.splice(matchingItemIndex, 1);
 }
