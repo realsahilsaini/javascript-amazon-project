@@ -5,8 +5,10 @@
 // 2. Extra features like constructor, inheritance, etc
 
 class Cart{
+  //public property
   cartItems; //undefined
-  localStorageKey; //undefined
+  //private property
+  #localStorageKey; //undefined
  
   //Works llike normal method.
   //When we generate the object of the class, this method will run.
@@ -16,12 +18,13 @@ class Cart{
   // 1. Has to be named constructor
   // 2. Should not return anything
   constructor(localStorageKey){
-    this.localStorageKey = localStorageKey;    
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;    
+    this.#loadFromStorage();
   }
 
-  loadFromStorage(){
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) 
+  //here making the method private since load may not be needed to be called from outside
+  #loadFromStorage(){
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) 
   
   if (!this.cartItems) //if not cart items in local storage 
   {
@@ -38,7 +41,7 @@ class Cart{
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -102,6 +105,9 @@ class Cart{
   //We can also put this log's in the constructor method of the class by adding console.log(this)
   console.log(cart);
   console.log(businessCart);
+
+  // To avoid changing the property/method private, hence we make it private
+  // cart.#loadFromStorageKey = 'aaa';
 
 
 
