@@ -1,15 +1,17 @@
 import { cart, addToCart } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
+import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { formatCurrency } from "./utils/money.js";
 
+loadProducts(renderProductsGrid);
 
-let productsHMTL = "";
+//This function will render the products grid on the page after getting the products from the XML request in"products.js" and we'll be calling this function there to render the products grid. 
+function renderProductsGrid() {
+  let productsHMTL = "";
 
-
-
-//We'll be getting "products" from the "products.js" in "data" folder
-products.forEach((product) => {
-  productsHMTL += `
+  //We'll be getting "products" from the "products.js" in "data" folder
+  products.forEach((product) => {
+    productsHMTL += `
   <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -64,31 +66,26 @@ products.forEach((product) => {
           </button>
         </div>
   `;
-});
-
-
-document.querySelector(".js-products-grid").innerHTML = productsHMTL;
-
-
-
-function updateCartQuantity(){
-  let cartQuantity = 0;
-
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
   });
 
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  document.querySelector(".js-products-grid").innerHTML = productsHMTL;
 
+  function updateCartQuantity() {
+    let cartQuantity = 0;
 
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
 
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  }
+
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log(cart);
+      const productId = button.dataset.productId;
+      addToCart(productId);
+      updateCartQuantity();
+    });
+  });
 }
-
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    console.log(cart);
-    const productId = button.dataset.productId;
-    addToCart(productId);
-    updateCartQuantity();
-  });
-});

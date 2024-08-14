@@ -1,18 +1,17 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-export function getProduct(productId)
-{
+export function getProduct(productId) {
   let matchingProduct;
-    products.forEach((product) => {
-      if (productId === product.id) {
-        matchingProduct = product;
-      }
-    });
+  products.forEach((product) => {
+    if (productId === product.id) {
+      matchingProduct = product;
+    }
+  });
 
-    return matchingProduct;
+  return matchingProduct;
 }
 
-class Product{
+class Product {
   //undefined variables
   id;
   image;
@@ -20,7 +19,7 @@ class Product{
   rating;
   priceCents;
 
-  constructor(productDetails){
+  constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image;
     this.name = productDetails.name;
@@ -28,45 +27,43 @@ class Product{
     this.priceCents = productDetails.priceCents;
   }
 
-  //Here we are creating a method that will return the URL of the image of the stars rating of the product (e.g. images/ratings/rating-45.png) 
-  getStarsUrl(){
-    return `images/ratings/rating-${this.rating.stars * 10}.png`
+  //Here we are creating a method that will return the URL of the image of the stars rating of the product (e.g. images/ratings/rating-45.png)
+  getStarsUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
 
-  //Here we are creating a method that will return the price of the product in dollars and cents format (e.g. $10.90) 
-  getPrice(){
+  //Here we are creating a method that will return the price of the product in dollars and cents format (e.g. $10.90)
+  getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
 
   //Here we are creating a method that will return empty extra information for the non-clothing products
-  extraInfoHTML(){
+  extraInfoHTML() {
     return "";
   }
 }
 
 //Here we are creating a new class called Clothing that inherits all the properties and methods of the Product class
-class Clothing extends Product{
- sizeChartLink;
+class Clothing extends Product {
+  sizeChartLink;
 
- //Remember if we dont create constructor in the child class, it will automatically call the constructor of the parent class
- constructor(productDetails){
-  //calls the constructor of the parent class  
-  super(productDetails)
-  this.sizeChartLink = productDetails.sizeChartLink;
- }
+  //Remember if we dont create constructor in the child class, it will automatically call the constructor of the parent class
+  constructor(productDetails) {
+    //calls the constructor of the parent class
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
 
-
- //Here we are creating a method that will return the extra information for the clothing products
- extraInfoHTML(){
-  return `
+  //Here we are creating a method that will return the extra information for the clothing products
+  extraInfoHTML() {
+    return `
   <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
   `;
- }
+  }
   //Remember: If we want to override a method of the parent class, we can do so by creating a method with the same name in the child class. Here we are overriding the extraInfoHTML method of the parent class.
 
   //suprer.extraInfoHTML() will call the extraInfoHTML method of the parent class
 }
-
 
 //Practice code
 // const tshirt = new Clothing(
@@ -91,9 +88,7 @@ class Clothing extends Product{
 // console.log(tshirt);
 // console.log(tshirt.getPrice());
 
-
-
-//Practice code 
+//Practice code
 //Here we are creating a new instance of the Product class, for better understanding we are just checking for one prodduct.
 // const product1 = new Product(
 //   {
@@ -114,8 +109,7 @@ class Clothing extends Product{
 // );
 // console.log(product1);
 
-
-
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -783,10 +777,31 @@ export const products = [
 
   return new Product(productDetails)
 });
+*/
+
+export let products = [];
+
+export function loadProducts(func) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+
+    func();
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
 
 //maps loops through array and creates new product object for each item in the array
-
-
 
 /*
 In-built Date class, infact the library DayJs is used in the project uses the Date class bts.
@@ -795,8 +810,6 @@ console.log(date);
 console.log(date.toLocaleDateString());
 console.log(date.toLocaleTimeString());
 */
-
-
 
 /*
 const obj2 = {
