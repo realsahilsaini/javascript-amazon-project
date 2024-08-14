@@ -67,6 +67,7 @@ class Clothing extends Product{
   //suprer.extraInfoHTML() will call the extraInfoHTML method of the parent class
 }
 
+
 //Practice code
 // const tshirt = new Clothing(
 //   {
@@ -784,3 +785,39 @@ export const products = [
 });
 
 //maps loops through array and creates new product object for each item in the array
+
+
+
+/*
+In-built Date class, infact the library DayJs is used in the project uses the Date class bts.
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleDateString());
+console.log(date.toLocaleTimeString());
+*/
+
+
+
+/*
+const obj2 = {
+  a: 1,
+  b: this.a,
+};
+console.log(obj2.b); //undefined
+*/
+
+/*
+function logThis(){
+  console.log(this);
+}
+logThis(); //undefined
+logThis.call('hello');
+
+
+const obj = {
+  method() {
+    console.log(this);
+  }
+};
+obj.method(); //obj
+*/
