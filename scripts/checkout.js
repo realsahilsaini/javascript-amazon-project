@@ -70,13 +70,21 @@ import { loadCart } from "../data/cart.js";
 //21:18:19
 async function loadPage() {
 
-  await loadProductsFetch();
+  try{
+    //manually creatig an error 
+    // throw 'error1';
+    await loadProductsFetch();
 
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve("value2");
+    await new Promise((resolve, reject) => {
+      // throw 'error2';
+      loadCart(() => {
+        // reject("error3");
+        resolve("value2");
+      });
     });
-  });
+  }catch(error){
+    console.log("An error occurred while loading the products.");
+  }
 
   renderOrderSummary();
   renderPaymentSummary();

@@ -794,6 +794,8 @@ export function loadProductsFetch(){
   });
 
   console.log('load products');
+}).catch((error)=>{
+  console.log("An error occurred while loading the products.");
 });
   return promise;
 }
@@ -817,6 +819,10 @@ export function loadProducts(func) {
     console.log('load products');
 
     func();
+  });
+
+  xhr.addEventListener("error", () => {
+    console.error("An error occurred while loading the products.");
   });
 
   xhr.open("GET", "https://supersimplebackend.dev/products");
