@@ -7,15 +7,12 @@ import { loadCart } from "../data/cart.js";
 // import  "../data/cart-class.js";
 // import "../data/backend-practice.js"
 
-
 // loadProducts(() => {
 //   renderOrderSummary();
 //   renderPaymentSummary();
 // });
 
-
-
-//Promise Practice 
+//Promise Practice
 //Create new promise object
 // new Promise((resolve)=>{
 //   loadProducts(()=>{
@@ -29,12 +26,11 @@ import { loadCart } from "../data/cart.js";
 //       resolve();
 //     });
 //   });
-  
+
 // }).then(()=>{
 //   renderOrderSummary();
 //   renderPaymentSummary();
 // });
-
 
 //Same as above but using Promise.all
 // Promise.all([
@@ -42,7 +38,7 @@ import { loadCart } from "../data/cart.js";
 //     loadProducts(()=>{
 //       resolve("value1");
 //     });
-  
+
 //   }),
 
 //   new Promise((resolve)=>{
@@ -52,33 +48,45 @@ import { loadCart } from "../data/cart.js";
 //   })
 // ]).then((values)=>{
 //   console.log(values);
-//   renderOrderSummary(); 
+//   renderOrderSummary();
 //   renderPaymentSummary();
 // });
 
-
 //Using loadproductsFetch instead of loadProducts
-Promise.all([
-  loadProductsFetch(),
+// Promise.all([
+//   loadProductsFetch(),
 
-  new Promise((resolve)=>{
-    loadCart(()=>{
+//   new Promise((resolve)=>{
+//     loadCart(()=>{
+//       resolve("value2");
+//     });
+//   })
+// ]).then((values)=>{
+//   console.log(values);
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
+
+//21:18:19
+async function loadPage() {
+
+  await loadProductsFetch();
+
+  await new Promise((resolve) => {
+    loadCart(() => {
       resolve("value2");
     });
-  })
-]).then((values)=>{
-  console.log(values);
-  renderOrderSummary(); 
+  });
+
+  renderOrderSummary();
   renderPaymentSummary();
-});
+}
+loadPage();
 
-
-// callback problem demonstration 
+// callback problem demonstration
 // loadProducts(() => {
 //   loadCart(() => {
 //     renderOrderSummary();
 //     renderPaymentSummary();
 //   });
 // });
-
-
