@@ -88,5 +88,13 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const url = new URL(window.location.href);
+      const orderid = url.searchParams.get("orderid");
+      console.log("Order ID: " + orderid);
+      const productid = url.searchParams.get("productid");
+      console.log("Product ID: " + productid);
+    </script>
   </body>
 </html>
