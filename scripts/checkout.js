@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 //importing cart object from cart-oop.js (runs all the code inside this file, without importing anything)
@@ -37,13 +37,29 @@ import { loadCart } from "../data/cart.js";
 
 
 //Same as above but using Promise.all
-Promise.all([
-  new Promise((resolve)=>{
-    loadProducts(()=>{
-      resolve("value1");
-    });
+// Promise.all([
+//   new Promise((resolve)=>{
+//     loadProducts(()=>{
+//       resolve("value1");
+//     });
   
-  }),
+//   }),
+
+//   new Promise((resolve)=>{
+//     loadCart(()=>{
+//       resolve("value2");
+//     });
+//   })
+// ]).then((values)=>{
+//   console.log(values);
+//   renderOrderSummary(); 
+//   renderPaymentSummary();
+// });
+
+
+//Using loadproductsFetch instead of loadProducts
+Promise.all([
+  loadProductsFetch(),
 
   new Promise((resolve)=>{
     loadCart(()=>{
