@@ -10,7 +10,7 @@ class Cart{
   //private property
   #localStorageKey; //undefined
  
-  //Works llike normal method.
+  //Works like normal method.
   //When we generate the object of the class, this method will run.
   //Constructor let's  us put this setup code inside the class.
   //Constructor is a special method that runs when we create a new instance of the class
